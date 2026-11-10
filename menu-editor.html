@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>تعديل منيو كاريزما</title>
+  <style>
+    :root {
+      --red: #ef3d2f;
+      --yellow: #ffc928;
+      --ink: #171717;
+      --paper: #f7f3eb;
+      --line: #ded8cd;
+      --muted: #716b61;
+      --white: #fffdf8;
+      --green: #2f7d58;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Tahoma, Arial, sans-serif;
+    }
+    button, input, textarea { font: inherit; }
+    .topbar {
+      padding: 22px 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--ink);
+      color: white;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-mark {
+      width: 42px; height: 42px; display: grid; place-items: center;
+      border-radius: 12px; background: var(--yellow); color: var(--ink);
+      font-weight: 900; font-size: 22px;
+    }
+    h1, h2, p { margin: 0; }
+    h1 { font-size: clamp(24px, 4vw, 36px); }
+    .topbar p { color: #d7d2ca; margin-top: 5px; font-size: 14px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    .button {
+      border: 0; border-radius: 10px; padding: 11px 15px; cursor: pointer;
+      font-weight: 800; transition: transform .18s ease, opacity .18s ease;
+    }
+    .button:active { transform: translateY(1px); }
+    .button:hover { opacity: .9; }
+    .button.primary { background: var(--yellow); color: var(--ink); }
+    .button.light { background: white; color: var(--ink); }
+    .button.danger { background: #ffe2de; color: #9c2318; }
+    .button.green { background: #d8f0df; color: #1d603f; }
+    main { width: min(1200px, 90vw); margin: 30px auto 50px; }
+    .notice {
+      padding: 14px 16px; border: 1px solid #e7c86d; border-radius: 12px;
+      background: #fff4bf; margin-bottom: 20px; line-height: 1.7;
+    }
+    .layout { display: grid; grid-template-columns: minmax(280px, .8fr) minmax(360px, 1.2fr); gap: 22px; align-items: start; }
+    .panel {
+      background: var(--white); border: 1px solid var(--line); border-radius: 16px;
+      padding: 20px; box-shadow: 0 12px 30px rgba(36, 27, 16, .06);
+    }
+    .panel h2 { font-size: 20px; margin-bottom: 16px; }
+    .field { display: grid; gap: 7px; margin-bottom: 13px; }
+    label { font-weight: 800; font-size: 14px; }
+    input, textarea {
+      width: 100%; border: 1px solid #cfc7ba; border-radius: 9px; padding: 11px 12px;
+      background: white; color: var(--ink); outline: none;
+    }
+    input:focus, textarea:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(239, 61, 47, .12); }
+    textarea { min-height: 88px; resize: vertical; }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .form-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+    .empty { color: var(--muted); line-height: 1.8; padding: 24px 4px; text-align: center; }
+    .item {
+      display: grid; grid-template-columns: 72px 1fr auto; gap: 12px; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid #ebe5dc;
+    }
+    .item:last-child { border-bottom: 0; }
+    .item img { width: 72px; height: 72px; border-radius: 10px; object-fit: cover; background: #eee; }
+    .item h3 { margin: 0 0 5px; font-size: 17px; }
+    .item p { color: var(--muted); font-size: 13px; line-height: 1.45; }
+    .meta { margin-top: 7px; color: var(--red); font-weight: 900; font-size: 14px; }
+    .item-actions { display: grid; gap: 6px; }
+    .item-actions .button { padding: 8px 10px; font-size: 13px; }
+    .status { min-height: 24px; color: var(--green); font-weight: 800; margin-top: 12px; }
+    .help { margin-top: 16px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+    @media (max-width: 760px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .layout { grid-template-columns: 1fr; }
+      main { width: min(94vw, 600px); margin-top: 18px; }
+      .item { grid-template-columns: 58px 1fr; }
+      .item img { width: 58px; height: 58px; }
+      .item-actions { grid-column: 2; grid-auto-flow: column; justify-content: start; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">ك</div>
+      <div>
+        <h1>تعديل منيو كاريزما</h1>
+        <p>عدّل الأصناف بسرعة من غير ما تفتح أي كود</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="button light" id="openControl">برنامج الإدارة</button>
+      <button class="button light" id="openSite">فتح الموقع</button>
+      <button class="button primary" id="exportMenu">حفظ نسخة ملف</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="notice">
+      اكتب التعديل واضغط <strong>حفظ الصنف</strong>. التغيير يظهر في موقع كاريزما على نفس الجهاز بعد تحديث الصفحة.
+    </div>
+
+    <div class="layout">
+      <section class="panel">
+        <h2 id="formTitle">إضافة صنف جديد</h2>
+        <form id="menuForm">
+          <div class="field">
+            <label for="itemName">اسم الصنف</label>
+            <input id="itemName" required placeholder="مثال: برجر مشروم">
+          </div>
+          <div class="field">
+            <label for="itemDescription">الوصف</label>
+            <textarea id="itemDescription" required placeholder="اكتب مكونات الصنف باختصار"></textarea>
+          </div>
+          <div class="two">
+            <div class="field">
+              <label for="itemPrice">السعر بالجنيه</label>
+              <input id="itemPrice" type="number" min="0" step="1" required placeholder="100">
+            </div>
+            <div class="field">
+              <label for="itemImpact">نقاط الأثر</label>
+              <input id="itemImpact" type="number" min="0" step="1" required placeholder="10">
+            </div>
+          </div>
+          <div class="field">
+            <label for="itemWaste">الهدر التقديري بالجرام</label>
+            <input id="itemWaste" type="number" min="0" step="1" required placeholder="150">
+          </div>
+          <div class="field">
+            <label for="itemImage">رابط صورة الصنف</label>
+            <input id="itemImage" type="url" required placeholder="https://...">
+          </div>
+          <div class="form-actions">
+            <button class="button primary" type="submit">حفظ الصنف</button>
+            <button class="button light" type="button" id="clearForm">مسح الخانات</button>
+          </div>
+          <div class="status" id="status" role="status"></div>
+        </form>
+        <p class="help">لو عايز تغيّر صنف موجود، اضغط تعديل بجانبه. زر حفظ نسخة ملف للنسخ الاحتياطي فقط.</p>
+      </section>
+
+      <section class="panel">
+        <h2>أصناف المنيو الحالية</h2>
+        <div id="itemsList"></div>
+      </section>
+    </div>
+  </main>
+
+  <script src="./menu-data.js"></script>
+  <script>
+    const storageKey = 'charisma-menu-data';
+    let items = Array.isArray(window.CHARISMA_MENU) ? window.CHARISMA_MENU.map(item => ({ ...item })) : [];
+    let editingId = null;
+    const $ = id => document.getElementById(id);
+
+    function saveItems(message) {
+      localStorage.setItem(storageKey, JSON.stringify(items));
+      renderItems();
+      $('status').textContent = message;
+    }
+
+    function renderItems() {
+      if (!items.length) {
+        $('itemsList').innerHTML = '<div class="empty">لا توجد أصناف. أضف أول صنف من الخانات الموجودة.</div>';
+        return;
+      }
+      $('itemsList').innerHTML = items.map(item => `
+        <article class="item">
+          <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" onerror="this.src='https://placehold.co/144x144/f1eadf/171717?text=Food'">
+          <div>
+            <h3>${escapeHtml(item.name)}</h3>
+            <p>${escapeHtml(item.description)}</p>
+            <div class="meta">${item.price} ج.م · ${item.impact} نقطة أثر</div>
+          </div>
+          <div class="item-actions">
+            <button class="button green" data-edit="${item.id}">تعديل</button>
+            <button class="button danger" data-delete="${item.id}">حذف</button>
+          </div>
+        </article>
+      `).join('');
+      $('itemsList').querySelectorAll('[data-edit]').forEach(button => {
+        button.addEventListener('click', () => editItem(Number(button.dataset.edit)));
+      });
+      $('itemsList').querySelectorAll('[data-delete]').forEach(button => {
+        button.addEventListener('click', () => deleteItem(Number(button.dataset.delete)));
+      });
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, character => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+      }[character]));
+    }
+
+    function editItem(id) {
+      const item = items.find(entry => entry.id === id);
+      if (!item) return;
+      editingId = id;
+      $('formTitle').textContent = 'تعديل الصنف';
+      $('itemName').value = item.name;
+      $('itemDescription').value = item.description;
+      $('itemPrice').value = item.price;
+      $('itemImpact').value = item.impact;
+      $('itemWaste').value = item.waste;
+      $('itemImage').value = item.image;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function deleteItem(id) {
+      const item = items.find(entry => entry.id === id);
+      if (!item || !window.confirm(`تحذف "${item.name}" من المنيو؟`)) return;
+      items = items.filter(entry => entry.id !== id);
+      saveItems('تم حذف الصنف وحفظ التعديل.');
+      if (editingId === id) clearForm();
+    }
+
+    function clearForm() {
+      editingId = null;
+      $('menuForm').reset();
+      $('formTitle').textContent = 'إضافة صنف جديد';
+      $('status').textContent = '';
+    }
+
+    $('menuForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const data = {
+        name: $('itemName').value.trim(),
+        description: $('itemDescription').value.trim(),
+        price: Number($('itemPrice').value),
+        impact: Number($('itemImpact').value),
+        waste: Number($('itemWaste').value),
+        image: $('itemImage').value.trim()
+      };
+      if (!data.name || !data.description || !data.image || data.price < 0 || data.impact < 0 || data.waste < 0) return;
+      if (editingId === null) {
+        const nextId = items.reduce((highest, item) => Math.max(highest, Number(item.id) || 0), 0) + 1;
+        items.push({ id: nextId, ...data });
+        saveItems('تمت إضافة الصنف وحفظه.');
+      } else {
+        items = items.map(item => item.id === editingId ? { id: editingId, ...data } : item);
+        saveItems('تم تعديل الصنف وحفظه.');
+      }
+      clearForm();
+    });
+
+    $('clearForm').addEventListener('click', clearForm);
+    $('openSite').addEventListener('click', () => {
+      window.open('./index.html', '_blank');
+    });
+    $('openControl').addEventListener('click', () => {
+      window.open('./control-panel.html', '_blank');
+    });
+    $('exportMenu').addEventListener('click', () => {
+      const content = `window.CHARISMA_MENU = ${JSON.stringify(items, null, 2)};\n\nwindow.CHARISMA_INTENTS = ${JSON.stringify(window.CHARISMA_INTENTS, null, 2)};\n`;
+      const blob = new Blob([content], { type: 'text/javascript;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'menu-data-backup.js';
+      link.click();
+      URL.revokeObjectURL(link.href);
+      $('status').textContent = 'تم تنزيل نسخة احتياطية من بيانات المنيو.';
+    });
+    renderItems();
+  </script>
+</body>
+</html>

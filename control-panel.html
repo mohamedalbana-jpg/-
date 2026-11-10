@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>برنامج إدارة كاريزما لوب</title>
+  <style>
+    :root { --ink:#171717; --paper:#f7f3eb; --card:#fffdf8; --red:#ef3d2f; --yellow:#ffc928; --green:#2f7d58; --line:#ded8cd; --muted:#716b61; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:Tahoma,Arial,sans-serif; }
+    button,input,textarea,select { font:inherit; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 5vw; background:var(--ink); color:#fff; }
+    h1,h2,h3,p { margin:0; }
+    h1 { font-size:clamp(23px,4vw,36px); }
+    .topbar p { margin-top:5px; color:#d7d2ca; font-size:13px; }
+    .brand { display:flex; align-items:center; gap:12px; }
+    .brand-mark { width:44px; height:44px; display:grid; place-items:center; border-radius:12px; background:var(--yellow); color:var(--ink); font-size:23px; font-weight:900; }
+    .actions,.form-actions { display:flex; flex-wrap:wrap; gap:8px; }
+    .button { border:0; border-radius:10px; padding:11px 15px; cursor:pointer; font-weight:800; }
+    .button.primary { background:var(--yellow); color:var(--ink); }
+    .button.light { background:#fff; color:var(--ink); }
+    .button.green { background:#d8f0df; color:#1d603f; }
+    .button.danger { background:#ffe2de; color:#9c2318; }
+    main { width:min(1200px,92vw); margin:28px auto 55px; }
+    .notice { margin-bottom:18px; padding:14px 16px; border:1px solid #e7c86d; border-radius:12px; background:#fff4bf; line-height:1.75; }
+    .grid { display:grid; grid-template-columns:minmax(280px,.8fr) minmax(360px,1.2fr); gap:20px; align-items:start; }
+    .panel { padding:20px; background:var(--card); border:1px solid var(--line); border-radius:16px; box-shadow:0 12px 30px rgba(36,27,16,.06); }
+    .panel h2 { margin-bottom:16px; font-size:20px; }
+    .field { display:grid; gap:7px; margin-bottom:13px; }
+    label { font-size:14px; font-weight:800; }
+    input,textarea,select { width:100%; padding:11px 12px; border:1px solid #cfc7ba; border-radius:9px; background:#fff; color:var(--ink); outline:none; }
+    input:focus,textarea:focus,select:focus { border-color:var(--red); box-shadow:0 0 0 3px rgba(239,61,47,.12); }
+    textarea { min-height:82px; resize:vertical; }
+    .two { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .status { min-height:24px; margin-top:12px; color:var(--green); font-weight:800; }
+    .subtle { color:var(--muted); font-size:13px; line-height:1.7; }
+    .offer { padding:14px 0; border-bottom:1px solid #ebe5dc; }
+    .offer:last-child { border-bottom:0; }
+    .offer-head { display:flex; justify-content:space-between; gap:12px; align-items:start; }
+    .offer h3 { font-size:17px; }
+    .offer p { margin-top:5px; color:var(--muted); font-size:13px; line-height:1.6; }
+    .offer-meta { margin-top:8px; color:var(--green); font-size:12px; font-weight:900; }
+    .offer-actions { display:flex; gap:6px; margin-top:10px; }
+    .empty { padding:22px 4px; color:var(--muted); text-align:center; line-height:1.8; }
+    @media (max-width:760px) { .topbar { align-items:flex-start; flex-direction:column; } .grid { grid-template-columns:1fr; } .two { grid-template-columns:1fr; } main { width:min(94vw,600px); } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div class="brand-mark">ك</div><div><h1>برنامج إدارة كاريزما لوب</h1><p>عدّل الصفحة، الأصناف، والعروض من غير كتابة كود</p></div></div>
+    <div class="actions">
+      <button class="button light" id="openSite">فتح المنيو</button>
+      <button class="button primary" id="downloadBackup">تنزيل نسخة احتياطية</button>
+    </div>
+  </header>
+  <main>
+    <div class="notice">التعديلات تحفظ على نفس الكمبيوتر والمتصفح في النسخة التجريبية. اضغط «تنزيل نسخة احتياطية» قبل نقل المشروع أو رفعه للدكتور.</div>
+    <div class="grid">
+      <section class="panel">
+        <h2>بيانات الصفحة الرئيسية</h2>
+        <form id="settingsForm">
+          <div class="field"><label for="restaurantName">اسم المطعم</label><input id="restaurantName" required></div>
+          <div class="field"><label for="heroEyebrow">الجملة الصغيرة فوق العنوان</label><input id="heroEyebrow" required></div>
+          <div class="field"><label for="heroDescription">وصف الصفحة</label><textarea id="heroDescription" required></textarea></div>
+          <div class="field"><label for="announcement">إعلان أعلى الصفحة، اختياري</label><input id="announcement" placeholder="مثال: عرض الجمعة شغال دلوقتي"></div>
+          <div class="form-actions"><button class="button primary" type="submit">حفظ بيانات الصفحة</button></div>
+          <div class="status" id="settingsStatus" role="status"></div>
+        </form>
+        <p class="subtle">لو سبت الإعلان فاضي، مش هيظهر للعميل أي شريط إضافي.</p>
+        <div class="form-actions" style="margin-top:16px"><button class="button green" id="openMenuEditor" type="button">تعديل الأصناف والأسعار</button><button class="button light" id="openQr" type="button">مولد QR</button></div>
+      </section>
+
+      <section class="panel">
+        <h2 id="offerFormTitle">إضافة عرض بوقت</h2>
+        <form id="offerForm">
+          <div class="field"><label for="offerTitle">اسم العرض</label><input id="offerTitle" required placeholder="مثال: عرض الدبل يوم الجمعة"></div>
+          <div class="field"><label for="offerDescription">تفاصيل العرض</label><textarea id="offerDescription" required placeholder="اكتب الخصم أو الهدية وشروطها"></textarea></div>
+          <div class="two">
+            <div class="field"><label for="offerStart">يبدأ في</label><input id="offerStart" type="datetime-local" required></div>
+            <div class="field"><label for="offerEnd">ينتهي في</label><input id="offerEnd" type="datetime-local" required></div>
+          </div>
+          <div class="field"><label for="offerItem">الصنف المرتبط، اختياري</label><select id="offerItem"><option value="">العرض عام</option></select></div>
+          <div class="form-actions"><button class="button primary" type="submit">حفظ العرض</button><button class="button light" id="clearOffer" type="button">مسح الخانات</button></div>
+          <div class="status" id="offerStatus" role="status"></div>
+        </form>
+        <h2 style="margin-top:24px">العروض المحفوظة</h2>
+        <div id="offersList"></div>
+      </section>
+    </div>
+  </main>
+  <script src="./menu-data.js"></script>
+  <script>
+    const settingsKey = 'charisma-site-settings';
+    const offersKey = 'charisma-offers';
+    const defaultSettings = { restaurantName: 'كاريزما لوب', heroEyebrow: 'الذكاء الاصطناعي بيظبطها على مزاجك', heroDescription: 'كاريزما لوب بتفهم ذوقك، وتختار لك وجبة مناسبة للمخزون الحالي عشان الأكل الحلو مايروحش هدر.', announcement: '' };
+    const $ = id => document.getElementById(id);
+    let settings = { ...defaultSettings, ...(JSON.parse(localStorage.getItem(settingsKey) || 'null') || {}) };
+    let offers = JSON.parse(localStorage.getItem(offersKey) || '[]');
+    let editingId = null;
+    function escapeHtml(value) { return String(value).replace(/[&<>"']/g, character => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;' }[character])); }
+    function loadSettings() { Object.keys(defaultSettings).forEach(key => { $(key).value = settings[key] || ''; }); }
+    function saveSettings(event) { event.preventDefault(); settings = { restaurantName:$('restaurantName').value.trim(), heroEyebrow:$('heroEyebrow').value.trim(), heroDescription:$('heroDescription').value.trim(), announcement:$('announcement').value.trim() }; localStorage.setItem(settingsKey, JSON.stringify(settings)); $('settingsStatus').textContent = 'تم حفظ بيانات الصفحة.'; }
+    function loadItems() { const items = Array.isArray(window.CHARISMA_MENU) ? window.CHARISMA_MENU : []; $('offerItem').innerHTML = '<option value="">العرض عام</option>' + items.map(item => `<option value="${item.id}">${escapeHtml(item.name)}</option>`).join(''); }
+    function formatDate(value) { if (!value) return ''; return new Intl.DateTimeFormat('ar-EG', { dateStyle:'short', timeStyle:'short' }).format(new Date(value)); }
+    function renderOffers() {
+      if (!offers.length) { $('offersList').innerHTML = '<div class="empty">لسه مفيش عروض. أضف أول عرض من الخانات.</div>'; return; }
+      const now = Date.now();
+      $('offersList').innerHTML = offers.slice().sort((a,b) => new Date(a.startAt) - new Date(b.startAt)).map(offer => {
+        const active = now >= new Date(offer.startAt).getTime() && now <= new Date(offer.endAt).getTime();
+        const item = window.CHARISMA_MENU.find(entry => String(entry.id) === String(offer.itemId));
+        return `<article class="offer"><div class="offer-head"><div><h3>${escapeHtml(offer.title)}</h3><p>${escapeHtml(offer.description)}</p></div><strong style="color:${active ? 'var(--green)' : 'var(--muted)'}">${active ? 'شغال الآن' : 'غير شغال'}</strong></div><div class="offer-meta">${formatDate(offer.startAt)} إلى ${formatDate(offer.endAt)}${item ? ` · على ${escapeHtml(item.name)}` : ''}</div><div class="offer-actions"><button class="button green" data-edit="${offer.id}">تعديل</button><button class="button danger" data-delete="${offer.id}">حذف</button></div></article>`;
+      }).join('');
+      $('offersList').querySelectorAll('[data-edit]').forEach(button => button.addEventListener('click', () => editOffer(button.dataset.edit)));
+      $('offersList').querySelectorAll('[data-delete]').forEach(button => button.addEventListener('click', () => deleteOffer(button.dataset.delete)));
+    }
+    function saveOffers(message) { localStorage.setItem(offersKey, JSON.stringify(offers)); renderOffers(); $('offerStatus').textContent = message; }
+    function clearOffer() { editingId = null; $('offerForm').reset(); $('offerFormTitle').textContent = 'إضافة عرض بوقت'; $('offerStatus').textContent = ''; }
+    function editOffer(id) { const offer = offers.find(entry => String(entry.id) === String(id)); if (!offer) return; editingId = offer.id; $('offerFormTitle').textContent = 'تعديل العرض'; $('offerTitle').value = offer.title; $('offerDescription').value = offer.description; $('offerStart').value = offer.startAt; $('offerEnd').value = offer.endAt; $('offerItem').value = offer.itemId || ''; window.scrollTo({ top:0, behavior:'smooth' }); }
+    function deleteOffer(id) { const offer = offers.find(entry => String(entry.id) === String(id)); if (!offer || !confirm(`تحذف "${offer.title}"؟`)) return; offers = offers.filter(entry => String(entry.id) !== String(id)); saveOffers('تم حذف العرض.'); if (String(editingId) === String(id)) clearOffer(); }
+    $('settingsForm').addEventListener('submit', saveSettings);
+    $('offerForm').addEventListener('submit', event => { event.preventDefault(); const data = { title:$('offerTitle').value.trim(), description:$('offerDescription').value.trim(), startAt:$('offerStart').value, endAt:$('offerEnd').value, itemId:$('offerItem').value }; if (!data.title || !data.description || !data.startAt || !data.endAt || new Date(data.endAt) <= new Date(data.startAt)) { $('offerStatus').textContent = 'راجع عنوان العرض والتوقيت، والنهاية لازم تكون بعد البداية.'; return; } if (editingId === null) offers.push({ id:`offer-${Date.now()}`, ...data }); else offers = offers.map(offer => offer.id === editingId ? { id:editingId, ...data } : offer); saveOffers('تم حفظ العرض.'); clearOffer(); });
+    $('clearOffer').addEventListener('click', clearOffer);
+    $('openSite').addEventListener('click', () => window.open('./index.html', '_blank'));
+    $('openMenuEditor').addEventListener('click', () => window.open('./menu-editor.html', '_blank'));
+    $('openQr').addEventListener('click', () => window.open('../../qr-generator.html', '_blank'));
+    $('downloadBackup').addEventListener('click', () => { const blob = new Blob([JSON.stringify({ settings, offers, menu:window.CHARISMA_MENU }, null, 2)], { type:'application/json' }); const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'charisma-management-backup.json'; link.click(); URL.revokeObjectURL(link.href); });
+    loadSettings(); loadItems(); renderOffers();
+  </script>
+</body>
+</html>
