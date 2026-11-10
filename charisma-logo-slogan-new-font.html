@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>شعار كاريزما</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700;800;900&family=Changa:wght@600;700;800&display=swap');
+    :root {
+      --red: #ef3d2f;
+      --yellow: #ffc928;
+      --ink: #171717;
+      --paper: #fff8eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      background: transparent;
+      font-family: Cairo, Arial, sans-serif;
+    }
+    .logo-stage {
+      width: min(100%, 980px);
+      min-height: 620px;
+      display: grid;
+      place-items: center;
+      padding: 48px;
+      background: transparent;
+      position: relative;
+      overflow: hidden;
+    }
+    .logo-stage:before,
+    .logo-stage:after { display: none; }
+    .logo-lockup {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      position: relative;
+      z-index: 1;
+      perspective: 900px;
+      transform-style: preserve-3d;
+      transition: transform .45s cubic-bezier(.16,1,.3,1);
+    }
+    .logo-lockup:hover {
+      transform: rotateX(5deg) rotateY(-7deg) translateY(-8px);
+    }
+    .emblem {
+      width: 210px;
+      height: 210px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--red);
+      border: 12px solid var(--ink);
+      box-shadow: 14px 16px 0 var(--yellow);
+      transform: rotate(-6deg) translateY(3px);
+      position: relative;
+      transition: transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s ease;
+    }
+    .logo-lockup:hover .emblem {
+      transform: rotate(-6deg) translateZ(28px) translateY(3px);
+      box-shadow: 22px 24px 0 var(--yellow), 0 28px 30px rgba(23,23,23,.18);
+    }
+    .emblem:before,
+    .emblem:after {
+      content: "";
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      height: 18px;
+      border-radius: 999px;
+      background: var(--yellow);
+      box-shadow: 0 5px 0 rgba(23,23,23,.22);
+    }
+    .emblem:before { top: 44px; }
+    .emblem:after { bottom: 44px; }
+    .emblem-letter {
+      color: var(--paper);
+      font-size: 112px;
+      line-height: 1;
+      font-weight: 900;
+      transform: translateY(3px);
+      text-shadow: 5px 6px 0 rgba(23,23,23,.23);
+    }
+    .wordmark {
+      color: var(--ink);
+      font-size: clamp(61px, 10.5vw, 122px);
+      line-height: .82;
+      letter-spacing: -.085em;
+      font-weight: 900;
+      transform: rotate(-6deg) skewX(-5deg);
+      text-shadow:
+        3px 4px 0 var(--yellow),
+        6px 7px 0 var(--red);
+      filter: drop-shadow(0 8px 0 rgba(23,23,23,.18));
+      transition: transform .45s cubic-bezier(.16,1,.3,1), filter .45s ease;
+    }
+    .logo-lockup:hover .wordmark {
+      transform: rotate(-5deg) skewX(-7deg) translateZ(34px) translateY(-3px);
+      filter: drop-shadow(0 12px 0 rgba(23,23,23,.2));
+    }
+    .tagline {
+      display: block;
+      width: max-content;
+      margin: 32px auto 0;
+      color: var(--red);
+      background: transparent;
+      border: 0;
+      font-family: Changa, Cairo, Arial, sans-serif;
+      font-size: clamp(18px, 2.4vw, 27px);
+      line-height: 1;
+      letter-spacing: -.03em;
+      font-weight: 800;
+      padding: 0;
+      text-align: center;
+      transform: rotate(-2deg);
+      text-shadow: 2px 3px 0 var(--yellow);
+      transition: transform .45s cubic-bezier(.16,1,.3,1), text-shadow .45s ease;
+    }
+    .logo-lockup:hover .tagline {
+      transform: rotate(-2deg) translateZ(18px) translateY(-2px);
+      text-shadow: 3px 4px 0 var(--yellow);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .logo-lockup, .emblem, .wordmark, .tagline { transition: none !important; }
+      .logo-lockup:hover, .logo-lockup:hover .emblem, .logo-lockup:hover .wordmark, .logo-lockup:hover .tagline {
+        transform: none;
+      }
+    }
+    .mini {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #776f66;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      white-space: nowrap;
+    }
+    @media (max-width: 700px) {
+      .logo-stage { min-height: 100dvh; padding: 28px; }
+      .logo-lockup { flex-direction: column; gap: 25px; }
+      .emblem { width: 165px; height: 165px; border-width: 9px; }
+      .emblem-letter { font-size: 88px; }
+      .emblem:before, .emblem:after { left: 23px; right: 23px; height: 14px; }
+      .emblem:before { top: 35px; }
+      .emblem:after { bottom: 35px; }
+      .wordmark { font-size: 70px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="logo-stage">
+    <div class="logo-lockup" aria-label="شعار مطعم كاريزما">
+      <div>
+        <div class="emblem" aria-hidden="true">
+          <span class="emblem-letter">ك</span>
+        </div>
+      </div>
+      <div>
+        <div class="wordmark">كاريزما</div>
+        <div class="tagline">محدش قدك</div>
+      </div>
+    </div>
+    <div class="mini">CHARISMA BURGER HOUSE</div>
+  </main>
+</body>
+</html>

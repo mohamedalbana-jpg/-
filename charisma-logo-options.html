@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>اختيارات لوجو كاريزما</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700;800;900&display=swap');
+    :root {
+      --red: #ef3d2f;
+      --yellow: #ffc928;
+      --ink: #171717;
+      --paper: #fff8eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      padding: 28px;
+      color: var(--ink);
+      font-family: Cairo, Arial, sans-serif;
+      background: #d7d0c3;
+    }
+    header {
+      max-width: 1180px;
+      margin: 0 auto 24px;
+      text-align: center;
+    }
+    h1 { margin: 0; font-size: clamp(26px, 4vw, 46px); }
+    p { margin: 8px 0 0; color: #5e574f; font-weight: 700; }
+    .options {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .option {
+      min-height: 300px;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 18px;
+      padding: 28px;
+      border: 2px solid rgba(23,23,23,.16);
+      border-radius: 18px;
+      background-color: #f7f3eb;
+      background-image:
+        linear-gradient(45deg, rgba(23,23,23,.055) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(23,23,23,.055) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(23,23,23,.055) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(23,23,23,.055) 75%);
+      background-size: 24px 24px;
+      background-position: 0 0, 0 12px, 12px -12px, -12px 0;
+    }
+    .option:nth-child(2) { background-color: #242424; }
+    .option:nth-child(4) { background-color: #fff; }
+    .label {
+      align-self: stretch;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-weight: 900;
+      font-size: 17px;
+    }
+    .badge {
+      color: var(--paper);
+      background: var(--red);
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+    .logo-lockup {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      direction: ltr;
+    }
+    .emblem {
+      width: 118px;
+      height: 118px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--red);
+      border: 7px solid var(--ink);
+      box-shadow: 9px 10px 0 var(--yellow);
+      transform: rotate(-6deg);
+      position: relative;
+    }
+    .emblem:before,
+    .emblem:after {
+      content: "";
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--yellow);
+    }
+    .emblem:before { top: 24px; }
+    .emblem:after { bottom: 24px; }
+    .emblem-letter {
+      color: var(--paper);
+      font-size: 65px;
+      line-height: 1;
+      font-weight: 900;
+      text-shadow: 3px 4px 0 rgba(23,23,23,.23);
+    }
+    .wordmark {
+      color: var(--ink);
+      font-size: clamp(42px, 7vw, 78px);
+      line-height: .86;
+      letter-spacing: -.1em;
+      font-weight: 900;
+      white-space: nowrap;
+      text-shadow: 4px 5px 0 var(--yellow);
+    }
+    .tagline {
+      color: var(--red);
+      font-size: 15px;
+      font-weight: 900;
+      margin-top: 12px;
+      text-align: center;
+    }
+    .sport .wordmark {
+      transform: rotate(-6deg) skewX(-5deg);
+      text-shadow: 2px 3px 0 var(--yellow), 5px 6px 0 var(--red);
+      filter: drop-shadow(0 6px 0 rgba(23,23,23,.18));
+    }
+    .sport .tagline {
+      display: inline-block;
+      color: var(--ink);
+      background: var(--yellow);
+      padding: 2px 12px 3px;
+      transform: rotate(-3deg) skewX(-5deg);
+      box-shadow: 4px 4px 0 var(--red);
+    }
+    .clean .emblem { box-shadow: 0 0 0 var(--yellow); }
+    .clean .wordmark { text-shadow: none; }
+    .clean .tagline { color: var(--ink); }
+    .print .emblem {
+      box-shadow: 5px 6px 0 var(--yellow), 10px 12px 0 var(--red);
+    }
+    .print .wordmark {
+      text-shadow: 3px 4px 0 var(--yellow), 6px 7px 0 var(--red), 9px 10px 0 var(--ink);
+    }
+    .print .tagline {
+      display: inline-block;
+      color: var(--ink);
+      background: var(--yellow);
+      padding: 2px 12px 3px;
+      box-shadow: 3px 3px 0 var(--red), 6px 6px 0 var(--ink);
+    }
+    .dark .wordmark { color: var(--paper); }
+    .dark .tagline { color: var(--paper); }
+    .dark .label { color: var(--paper); }
+    @media (max-width: 760px) {
+      body { padding: 16px; }
+      .options { grid-template-columns: 1fr; }
+      .option { min-height: 260px; padding: 22px 14px; }
+      .logo-lockup { gap: 15px; transform: scale(.86); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>اختيارات لوجو كاريزما</h1>
+    <p>الخلفية المربعة مجرد معاينة للشفافية. اختار رقم النسخة اللي عايزها.</p>
+  </header>
+  <main class="options">
+    <section class="option">
+      <div class="label"><span>1. القديم الأصلي</span><span class="badge">الأقرب للنسخة الأساسية</span></div>
+      <div class="logo-lockup">
+        <div class="emblem"><span class="emblem-letter">ك</span></div>
+        <div><div class="wordmark">كاريزما</div><div class="tagline">برجر وفاست فود</div></div>
+      </div>
+    </section>
+    <section class="option dark sport">
+      <div class="label"><span>2. القديم بخط رياضي</span><span class="badge">بدون خلفية</span></div>
+      <div class="logo-lockup">
+        <div class="emblem"><span class="emblem-letter">ك</span></div>
+        <div><div class="wordmark">كاريزما</div><div class="tagline">محدش قدك</div></div>
+      </div>
+    </section>
+    <section class="option clean">
+      <div class="label"><span>3. القديم النضيف</span><span class="badge">مناسب للصور</span></div>
+      <div class="logo-lockup">
+        <div class="emblem"><span class="emblem-letter">ك</span></div>
+        <div><div class="wordmark">كاريزما</div><div class="tagline">برجر وفاست فود</div></div>
+      </div>
+    </section>
+    <section class="option print">
+      <div class="label"><span>4. القديم العميق</span><span class="badge">ستايل 3D</span></div>
+      <div class="logo-lockup">
+        <div class="emblem"><span class="emblem-letter">ك</span></div>
+        <div><div class="wordmark">كاريزما</div><div class="tagline">برجر وفاست فود</div></div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

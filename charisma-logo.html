@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>شعار كاريزما</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@700;800;900&display=swap');
+    :root {
+      --red: #ef3d2f;
+      --yellow: #ffc928;
+      --ink: #171717;
+      --paper: #fff8eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      background: #d7d0c3;
+      font-family: Cairo, Arial, sans-serif;
+    }
+    .logo-stage {
+      width: min(100%, 980px);
+      min-height: 620px;
+      display: grid;
+      place-items: center;
+      padding: 48px;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,201,40,.22), transparent 22%),
+        radial-gradient(circle at 86% 78%, rgba(239,61,47,.16), transparent 24%),
+        var(--paper);
+      position: relative;
+      overflow: hidden;
+    }
+    .logo-stage:before,
+    .logo-stage:after {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border: 20px solid var(--yellow);
+      border-radius: 50%;
+      opacity: .7;
+    }
+    .logo-stage:before { top: -120px; right: -80px; }
+    .logo-stage:after { bottom: -155px; left: -90px; border-color: var(--red); }
+    .logo-lockup {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      position: relative;
+      z-index: 1;
+    }
+    .emblem {
+      width: 210px;
+      height: 210px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--red);
+      border: 12px solid var(--ink);
+      box-shadow: 14px 16px 0 var(--yellow);
+      transform: rotate(-6deg);
+      position: relative;
+    }
+    .emblem:before,
+    .emblem:after {
+      content: "";
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      height: 18px;
+      border-radius: 999px;
+      background: var(--yellow);
+      box-shadow: 0 5px 0 rgba(23,23,23,.22);
+    }
+    .emblem:before { top: 44px; }
+    .emblem:after { bottom: 44px; }
+    .emblem-letter {
+      color: var(--paper);
+      font-size: 112px;
+      line-height: 1;
+      font-weight: 900;
+      transform: translateY(3px);
+      text-shadow: 5px 6px 0 rgba(23,23,23,.23);
+    }
+    .wordmark {
+      color: var(--ink);
+      font-size: clamp(68px, 12vw, 138px);
+      line-height: .9;
+      letter-spacing: -.1em;
+      font-weight: 900;
+      text-shadow: 5px 6px 0 var(--yellow);
+    }
+    .tagline {
+      color: var(--red);
+      font-size: clamp(17px, 2.3vw, 25px);
+      letter-spacing: .08em;
+      font-weight: 900;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .mini {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #776f66;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      white-space: nowrap;
+    }
+    @media (max-width: 700px) {
+      .logo-stage { min-height: 100dvh; padding: 28px; }
+      .logo-lockup { flex-direction: column; gap: 25px; }
+      .emblem { width: 165px; height: 165px; border-width: 9px; }
+      .emblem-letter { font-size: 88px; }
+      .emblem:before, .emblem:after { left: 23px; right: 23px; height: 14px; }
+      .emblem:before { top: 35px; }
+      .emblem:after { bottom: 35px; }
+      .wordmark { font-size: 70px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="logo-stage">
+    <div class="logo-lockup" aria-label="شعار مطعم كاريزما">
+      <div>
+        <div class="emblem" aria-hidden="true">
+          <span class="emblem-letter">ك</span>
+        </div>
+      </div>
+      <div>
+        <div class="wordmark">كاريزما</div>
+        <div class="tagline">برجر وفاست فود</div>
+      </div>
+    </div>
+    <div class="mini">CHARISMA BURGER HOUSE</div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BITE BOX - منيو</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800;900&display=swap');
+    :root {
+      --ink: #171717;
+      --paper: #fff8eb;
+      --red: #ef3d2f;
+      --yellow: #ffc928;
+      --line: #e6d9c7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #d7d0c3;
+      color: var(--ink);
+      font-family: Cairo, Arial, sans-serif;
+    }
+    .poster {
+      width: min(100%, 1120px);
+      min-height: 100dvh;
+      margin: 0 auto;
+      padding: 28px;
+      background: var(--paper);
+      overflow: hidden;
+      position: relative;
+      perspective: 1200px;
+    }
+    .poster:before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: var(--yellow);
+      left: -180px;
+      top: 220px;
+      opacity: .7;
+      z-index: 0;
+    }
+    .topbar, .hero, .content, .footer { position: relative; z-index: 1; }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid var(--ink);
+      padding-bottom: 13px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+    .brand-mark { display: flex; align-items: center; gap: 10px; }
+    .mark {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--red);
+      color: var(--yellow);
+      font-size: 23px;
+      transform: rotate(-7deg);
+      position: relative;
+      box-shadow: 0 5px 0 #bd2b23;
+    }
+    .mark:before,
+    .mark:after {
+      content: "";
+      position: absolute;
+      width: 25px;
+      height: 5px;
+      border-radius: 999px;
+      background: var(--yellow);
+      left: 9px;
+    }
+    .mark:before { top: 11px; }
+    .mark:after { bottom: 11px; }
+    .logo-type {
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: -.08em;
+      line-height: 1;
+    }
+    .logo-type small {
+      display: block;
+      color: var(--red);
+      font-size: 9px;
+      letter-spacing: .12em;
+      margin-top: 4px;
+      text-align: center;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 26px;
+      align-items: center;
+      padding: 35px 0 25px;
+    }
+    .hero-copy { text-align: right; }
+    .kicker {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--yellow);
+      padding: 5px 13px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      transform: rotate(-2deg);
+    }
+    h1 {
+      font-size: clamp(54px, 9vw, 108px);
+      line-height: .9;
+      margin: 18px 0 16px;
+      letter-spacing: -.08em;
+      font-weight: 900;
+    }
+    h1 span { color: var(--red); display: block; }
+    .hero-copy p { margin: 0; max-width: 320px; font-size: 17px; line-height: 1.7; font-weight: 700; }
+    .hero-photo {
+      min-height: 300px;
+      border-radius: 34px 8px 34px 8px;
+      background: #222;
+      box-shadow: 14px 14px 0 var(--red);
+      transform: rotate(2deg);
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform .35s ease, box-shadow .35s ease;
+      overflow: hidden;
+    }
+    .hero-photo:hover {
+      transform: rotateX(3deg) rotateY(-5deg) rotateZ(2deg) translateY(-5px);
+      box-shadow: 20px 22px 0 var(--red), 0 28px 34px rgba(23,23,23,.18);
+    }
+    .hero-photo:after {
+      content: "الأكثر طلباً";
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      background: var(--yellow);
+      padding: 8px 13px;
+      font-weight: 900;
+      border-radius: 5px;
+      transform: rotate(-4deg);
+      box-shadow: 0 7px 0 #cf9f13, 0 12px 18px rgba(23,23,23,.18);
+      transform: translateZ(32px) rotate(-4deg);
+    }
+    .hero-photo:before {
+      content: "";
+      position: absolute;
+      width: 92px;
+      height: 92px;
+      right: 24px;
+      top: 24px;
+      border-radius: 50%;
+      background: var(--yellow);
+      border: 7px solid var(--paper);
+      box-shadow: 0 11px 0 #cf9f13, 0 18px 22px rgba(23,23,23,.2);
+      transform: translateZ(40px) rotate(-12deg);
+    }
+    .exploded-burger {
+      position: absolute;
+      inset: 20px 18px 18px;
+      transform: translateZ(12px);
+    }
+    .burger-slice {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 26px;
+      background-image: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=85');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      box-shadow: 0 7px 0 rgba(0,0,0,.22), 0 12px 18px rgba(0,0,0,.2);
+      transition: transform .35s ease;
+    }
+    .slice-bun-top {
+      clip-path: inset(0 0 72% 0);
+      border-radius: 45px 45px 18px 18px;
+      transform: translateY(-11px) translateZ(35px) rotate(-2deg);
+    }
+    .slice-sauce {
+      clip-path: inset(28% 0 57% 0);
+      transform: translateX(17px) translateY(-2px) translateZ(26px) rotate(2deg);
+    }
+    .slice-patty {
+      clip-path: inset(38% 0 39% 0);
+      transform: translateX(-8px) translateY(3px) translateZ(18px) rotate(-1deg);
+    }
+    .slice-cheese {
+      clip-path: inset(49% 0 33% 0);
+      transform: translateX(15px) translateY(5px) translateZ(12px) rotate(2deg);
+    }
+    .slice-fresh {
+      clip-path: inset(57% 0 21% 0);
+      transform: translateX(-12px) translateY(7px) translateZ(7px) rotate(-2deg);
+    }
+    .slice-bun-bottom {
+      clip-path: inset(70% 0 0 0);
+      border-radius: 16px 16px 34px 34px;
+      transform: translateX(7px) translateY(10px) translateZ(2px) rotate(1deg);
+    }
+    .slice-label {
+      position: absolute;
+      right: -2px;
+      padding: 5px 9px;
+      background: var(--paper);
+      color: var(--ink);
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 900;
+      box-shadow: 3px 4px 0 var(--yellow);
+      transform: translateZ(55px) rotate(-4deg);
+    }
+    .label-patty { top: 42%; }
+    .label-cheese { top: 55%; }
+    .label-fresh { top: 67%; }
+    .label-bun { top: 82%; }
+    .hero-photo:hover .slice-bun-top { transform: translateY(-4px) translateZ(45px) rotate(-2deg); }
+    .hero-photo:hover .slice-patty { transform: translateX(-8px) translateY(3px) translateZ(28px) rotate(-1deg); }
+    .hero-photo:hover .slice-cheese { transform: translateX(15px) translateY(5px) translateZ(20px) rotate(2deg); }
+    .content {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 34px;
+      padding-top: 24px;
+    }
+    .section { margin-bottom: 30px; }
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .section-title h2 { font-size: 25px; margin: 0; font-weight: 900; }
+    .section-title i { height: 4px; background: var(--red); flex: 1; transform: skewX(-20deg); }
+    .item {
+      display: grid;
+      grid-template-columns: 58px 1fr auto;
+      gap: 14px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: center;
+    }
+    .item-thumb {
+      width: 58px;
+      height: 58px;
+      border-radius: 17px 5px 17px 5px;
+      background-position: center;
+      background-size: cover;
+      box-shadow: 4px 5px 0 var(--yellow);
+      transform: rotate(-3deg);
+    }
+    .thumb-classic { background-image: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=180&q=80'); }
+    .thumb-cheese { background-image: url('https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=180&q=80'); }
+    .thumb-double { background-image: url('https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=180&q=80'); }
+    .thumb-chicken { background-image: url('https://images.unsplash.com/photo-1606755962773-d324e0a13086?auto=format&fit=crop&w=180&q=80'); }
+    .thumb-crunchy { background-image: url('https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=180&q=80'); }
+    .thumb-wrap { background-image: url('https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=180&q=80'); }
+    .thumb-family { background-image: url('https://images.unsplash.com/photo-1513639776629-7b61b0ac49cb?auto=format&fit=crop&w=180&q=80'); }
+    .thumb-fries { background-image: url('https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=180&q=80'); }
+    .thumb-cheese-fries { background-image: url('https://images.unsplash.com/photo-1585109649139-366815a0d713?auto=format&fit=crop&w=180&q=80'); }
+    .thumb-onion { background-image: url('https://images.unsplash.com/photo-1639024471283-03518883512d?auto=format&fit=crop&w=180&q=80'); }
+    .thumb-sauce { background-image: url('https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=180&q=80'); }
+    .item:last-child { border-bottom: 0; }
+    .item h3 { margin: 0; font-size: 17px; font-weight: 900; }
+    .item p { margin: 2px 0 0; color: #6f665d; font-size: 12px; line-height: 1.5; }
+    .price { color: var(--red); font-size: 18px; font-weight: 900; white-space: nowrap; }
+    .combo {
+      background: var(--red);
+      color: white;
+      padding: 19px;
+      border-radius: 8px 28px 8px 28px;
+      margin-top: 12px;
+      box-shadow: 8px 8px 0 var(--yellow);
+    }
+    .combo small { color: var(--yellow); font-weight: 900; }
+    .combo h2 { margin: 3px 0 7px; font-size: 27px; }
+    .combo p { margin: 0; font-size: 13px; font-weight: 700; }
+    .side-photo {
+      height: 188px;
+      margin: 0 0 20px;
+      border-radius: 8px 30px 8px 30px;
+      background: url('https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=900&q=85') center/cover;
+      filter: saturate(1.15);
+      transform: rotate(-2deg) translateZ(0);
+      box-shadow: 10px 12px 0 var(--yellow), 0 22px 28px rgba(23,23,23,.14);
+      transition: transform .35s ease;
+    }
+    .side-photo:hover { transform: rotate(2deg) translateY(-5px) scale(1.015); }
+    .item {
+      position: relative;
+      transition: transform .25s ease, background-color .25s ease;
+    }
+    .item:hover {
+      transform: translateX(-6px) translateZ(8px);
+      background: rgba(255,201,40,.16);
+    }
+    .combo {
+      position: relative;
+      transform: rotate(1deg);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .combo:before,
+    .combo:after {
+      content: "";
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      background: var(--yellow);
+      border-radius: 7px;
+      box-shadow: 5px 6px 0 #cf9f13;
+      pointer-events: none;
+    }
+    .combo:before { top: -13px; left: 22px; transform: rotate(18deg) translateZ(16px); }
+    .combo:after { bottom: -12px; right: 22px; transform: rotate(-16deg) translateZ(16px); }
+    .combo:hover {
+      transform: rotate(0) translateY(-5px);
+      box-shadow: 12px 15px 0 var(--yellow), 0 22px 24px rgba(23,23,23,.18);
+    }
+    .footer {
+      margin-top: 25px;
+      padding-top: 14px;
+      border-top: 3px solid var(--ink);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    @media (max-width: 700px) {
+      .poster { padding: 18px; }
+      .hero, .content { grid-template-columns: 1fr; }
+      .hero { padding-top: 28px; }
+      .hero-copy { text-align: center; }
+      .hero-copy p { margin: auto; }
+      .hero-photo { min-height: 220px; }
+      .exploded-burger { transform: scale(.72); transform-origin: center center; }
+      .content { gap: 10px; }
+      .footer { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="poster">
+    <header class="topbar">
+      <div class="brand-mark" aria-label="شعار مطعم كاريزما">
+        <span class="mark" aria-hidden="true">ك</span>
+        <span class="logo-type">كاريزما<small>برجر وفاست فود</small></span>
+      </div>
+      <span>منيو 2026 / اطلبها سخنة</span>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="kicker">فاست فود على أصوله</span>
+        <h1>كُل<br><span>بمزاجك.</span></h1>
+        <p>برجر طازة، فراخ مقرمشة، وصوصات معمولة عندنا. اختار وجبتك وخلي الباقي علينا.</p>
+      </div>
+      <div class="hero-photo" aria-label="برجر مفكك إلى مكوناته">
+        <div class="exploded-burger" aria-hidden="true">
+          <div class="burger-slice slice-bun-top"></div>
+          <div class="burger-slice slice-sauce"></div>
+          <div class="burger-slice slice-patty"></div>
+          <div class="burger-slice slice-cheese"></div>
+          <div class="burger-slice slice-fresh"></div>
+          <div class="burger-slice slice-bun-bottom"></div>
+          <span class="slice-label label-patty">لحم مشوي</span>
+          <span class="slice-label label-cheese">جبنة شيدر</span>
+          <span class="slice-label label-fresh">خس وطماطم</span>
+          <span class="slice-label label-bun">خبز بريوش</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="content">
+      <div>
+        <section class="section">
+          <div class="section-title"><h2>البرجر</h2><i></i></div>
+          <article class="item"><div class="item-thumb thumb-classic" role="img" aria-label="كلاسيك برجر"></div><div><h3>كلاسيك برجر</h3><p>لحم مشوي، جبنة، خس، طماطم وصوص خاص</p></div><strong class="price">85 ج.م</strong></article>
+          <article class="item"><div class="item-thumb thumb-cheese" role="img" aria-label="تشيز برجر"></div><div><h3>تشيز برجر</h3><p>شيدر، بصل، مخلل وصوص برجر</p></div><strong class="price">95 ج.م</strong></article>
+          <article class="item"><div class="item-thumb thumb-double" role="img" aria-label="دبل بيج"></div><div><h3>دبل بيج</h3><p>قطعتان لحم، جبنة مضاعفة وصوص مدخن</p></div><strong class="price">125 ج.م</strong></article>
+          <article class="item"><div class="item-thumb thumb-chicken" role="img" aria-label="تشيكن برجر"></div><div><h3>تشيكن برجر</h3><p>دجاج مقرمش، خس، جبنة ومايونيز</p></div><strong class="price">90 ج.م</strong></article>
+        </section>
+
+        <section class="section">
+          <div class="section-title"><h2>وجبات الفراخ</h2><i></i></div>
+          <article class="item"><div class="item-thumb thumb-crunchy" role="img" aria-label="كرانشي تشيكن"></div><div><h3>كرانشي تشيكن</h3><p>قطعتان دجاج + بطاطس + مشروب</p></div><strong class="price">120 ج.م</strong></article>
+          <article class="item"><div class="item-thumb thumb-wrap" role="img" aria-label="تشيكن راب"></div><div><h3>تشيكن راب</h3><p>دجاج مشوي، جبنة، خس وصوص رانش</p></div><strong class="price">80 ج.م</strong></article>
+          <article class="item"><div class="item-thumb thumb-family" role="img" aria-label="بوكس العيلة"></div><div><h3>بوكس العيلة</h3><p>6 قطع دجاج + 3 بطاطس + 4 مشروبات</p></div><strong class="price">390 ج.م</strong></article>
+        </section>
+      </div>
+
+      <div>
+        <div class="side-photo" aria-label="صورة بطاطس"></div>
+        <section class="section">
+          <div class="section-title"><h2>الإضافات</h2><i></i></div>
+          <article class="item"><div class="item-thumb thumb-fries" role="img" aria-label="بطاطس عادية"></div><div><h3>بطاطس عادية</h3><p>أصابع ذهبية مقرمشة مع رشة ملح</p></div><strong class="price">35 ج.م</strong></article>
+          <article class="item"><div class="item-thumb thumb-cheese-fries" role="img" aria-label="بطاطس تشيز"></div><div><h3>بطاطس تشيز</h3><p>بطاطس ساخنة مع صوص جبنة كريمي</p></div><strong class="price">55 ج.م</strong></article>
+          <article class="item"><div class="item-thumb thumb-onion" role="img" aria-label="حلقات بصل"></div><div><h3>حلقات بصل</h3><p>حلقات بصل مقرمشة بتتبيلة خاصة</p></div><strong class="price">45 ج.م</strong></article>
+          <article class="item"><div class="item-thumb thumb-sauce" role="img" aria-label="صوص إضافي"></div><div><h3>صوص إضافي</h3><p>اختار صوص البرجر أو الباربكيو أو الرانش</p></div><strong class="price">15 ج.م</strong></article>
+        </section>
+        <div class="combo">
+          <small>عرض اليوم</small>
+          <h2>الكومبو اللي يظبطك</h2>
+          <p>تشيز برجر + بطاطس تشيز + كانز<br><b>145 ج.م فقط</b></p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <span>للطلب: 0100 123 4567</span>
+      <span>شارع المطاعم، بجوار المول</span>
+      <span>كل يوم من 12 ظهراً إلى 2 صباحاً</span>
+    </footer>
+  </main>
+</body>
+</html>

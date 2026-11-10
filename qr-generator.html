@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>مولد QR | كاريزما لوب</title>
+  <style>
+    :root { --ink:#171717; --paper:#f7f3eb; --red:#ef3d2f; --yellow:#ffc928; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100dvh; display:grid; place-items:center; background:var(--paper); color:var(--ink); font-family:Arial,sans-serif; }
+    main { width:min(620px, calc(100% - 32px)); padding:28px; background:#fffdf8; border:1px solid #ddd6ca; border-radius:24px; box-shadow:0 20px 60px #17171718; text-align:center; }
+    h1 { margin:0 0 8px; font-size:30px; } p { color:#71695f; line-height:1.7; }
+    label { display:block; margin:18px 0 7px; text-align:right; font-weight:800; }
+    input { width:100%; padding:13px 14px; border:1px solid #d5cec2; border-radius:12px; font:inherit; direction:ltr; }
+    button { margin-top:14px; padding:13px 18px; border:0; border-radius:12px; background:var(--red); color:#fff8eb; font-weight:900; cursor:pointer; }
+    #result { margin-top:24px; } #result img { width:260px; height:260px; display:block; margin:18px auto; }
+    .hint { font-size:12px; }
+    @media print { body { background:#fff; } main { box-shadow:none; border:0; } form, .hint { display:none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>مولد QR كاريزما</h1>
+    <p>الرابط يتجهز تلقائيًا من الدومين المنشور، ثم اطبع QR للطاولات أو للكيس.</p>
+    <form id="qrForm">
+      <label for="url">رابط الموقع</label>
+      <input id="url" required>
+      <label for="type">نوع الاستخدام</label>
+      <select id="type" style="width:100%;padding:13px;border:1px solid #d5cec2;border-radius:12px;font:inherit">
+        <option value="menu">منيو عام</option>
+        <option value="table">طاولة محددة</option>
+        <option value="impact">صفحة أثر الكيس</option>
+      </select>
+      <label for="number">رقم الطاولة (اختياري)</label>
+      <input id="number" inputmode="numeric" placeholder="مثال: 7">
+      <button type="submit">إنشاء QR</button>
+    </form>
+    <section id="result" hidden></section>
+    <p class="hint">في التشغيل الحقيقي استخدم رابط HTTPS ثابت. QR الأكياس يكون عامًا، وكود الأثر يتولد مع الطلب.</p>
+  </main>
+  <script src="./site-config.js"></script>
+  <script>
+    const configuredUrl = window.CHARISMA_SITE_CONFIG?.publicUrl || '';
+    const isPlaceholder = configuredUrl.includes('YOUR-DOMAIN');
+    const defaultUrl = !isPlaceholder
+      ? configuredUrl
+      : window.location.protocol === 'file:'
+        ? 'https://YOUR-DOMAIN.example'
+        : window.location.origin;
+    document.getElementById('url').value = defaultUrl.replace(/\/+$/, '') + '/';
+    document.getElementById('qrForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const base = document.getElementById('url').value.trim();
+      const type = document.getElementById('type').value;
+      const number = document.getElementById('number').value.trim();
+      const target = type === 'table' && number
+        ? `${base}${base.includes('?') ? '&' : '?'}table=${encodeURIComponent(number)}`
+        : type === 'impact'
+          ? `${base}${base.includes('?') ? '&' : '?'}impact=1`
+          : base;
+      const image = `https://api.qrserver.com/v1/create-qr-code/?size=600x600&data=${encodeURIComponent(target)}`;
+      const result = document.getElementById('result');
+      result.hidden = false;
+      result.innerHTML = `<strong>${target}</strong><img src="${image}" alt="QR Code"><button type="button" onclick="window.print()">طباعة QR</button>`;
+    });
+  </script>
+</body>
+</html>
